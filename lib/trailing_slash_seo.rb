@@ -8,7 +8,7 @@ module TrailingSlashSeo
   
   module ClassMethods
     def process_with_redirect(request, response)
-      return response.redirect(self.url, 301) unless self.virtual? || request.path == self.url
+      return response.redirect(self.url, 301) if !self.virtual? && request.path !== self.url
       process_without_redirect(request, response)
     end
   end
